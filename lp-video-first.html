@@ -12,6 +12,11 @@
     .btn{display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:13px 18px;border-radius:10px;font-weight:700}
     video,img{width:100%;border-radius:10px}
     .price{font-size:22px;color:#ffd166;font-weight:700}
+    .price-line{margin:10px 0 14px}
+    .old{opacity:.72;text-decoration:line-through;margin-right:8px}
+    .new{font-size:30px;font-weight:800;color:#ffd166;letter-spacing:.3px}
+    .pulse{display:inline-block;animation:pulseGold 2.6s ease-in-out infinite}
+    @keyframes pulseGold{0%,100%{text-shadow:0 0 0 rgba(255,209,102,0)}50%{text-shadow:0 0 16px rgba(255,209,102,.45)}}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     @media(max-width:700px){.row{grid-template-columns:1fr}}
   </style>
@@ -45,6 +50,7 @@
 
     <div class="box">
       <p class="price">Jaminan 100% Asli • Harga Paling Murah Langsung dari Pusat</p>
+      <p class="price-line"><span class="old">Rp150.000</span><span class="new pulse">Rp130.000</span></p>
       <ul>
         <li>Barang dijamin asli/original</li>
         <li>Harganya lebih hemat (nggak kena potongan harga toko sebelah)</li>
