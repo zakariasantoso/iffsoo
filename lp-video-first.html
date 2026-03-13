@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IFFSOO Gold - Video Bukti Produk Original</title>
+  <style>
+    body{margin:0;font-family:Arial,sans-serif;background:#0d0d0d;color:#fff}
+    .wrap{max-width:860px;margin:auto;padding:16px}
+    .box{background:#171717;border:1px solid #2b2b2b;border-radius:14px;padding:14px;margin:12px 0}
+    h1{font-size:28px;line-height:1.2;margin:8px 0}
+    .btn{display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:13px 18px;border-radius:10px;font-weight:700}
+    video,img{width:100%;border-radius:10px}
+    .price{font-size:22px;color:#ffd166;font-weight:700}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:700px){.row{grid-template-columns:1fr}}
+  </style>
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '948013317787488');
+    fbq('track', 'PageView');
+    fbq('track', 'ViewContent', {content_name:'LP Video First IFFSOO'});
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="box">
+      <h1>Mumpung Lagi Ada Stok & Harganya Murah, Pak. Pesan Sekarang Sebelum Kehabisan!</h1>
+      <p>Pilihan tepat buat Bapak yang kerjanya sibuk dan sering gampang tepar.</p>
+      <a id="waTop" class="btn" href="#">Tanya Saya & Pesan Sekarang</a>
+    </div>
+
+    <div class="box">
+      <video controls playsinline preload="metadata" src="assets/Photos-3-001/1770908942245.mp4"></video>
+    </div>
+
+    <div class="row">
+      <div class="box"><img src="assets/487192084_17848254924439091_1480220894083345293_n.jpg" alt="Produk" /></div>
+      <div class="box"><img src="assets/logo iffsoo.jpeg" alt="Logo IFFSOO" /></div>
+    </div>
+
+    <div class="box">
+      <p class="price">Jaminan 100% Asli • Harga Paling Murah Langsung dari Pusat</p>
+      <ul>
+        <li>Barang dijamin asli/original</li>
+        <li>Harganya lebih hemat (nggak kena potongan harga toko sebelah)</li>
+        <li>Biar Bapak kuat kerja dari pagi sampai malam</li>
+      </ul>
+      <a id="waBottom" class="btn" href="#">Saya Mau Pesan Sekarang</a>
+    </div>
+  </div>
+
+  <script>
+    const WA_NUMBER='6280000000000';
+    const WA_TEXT=encodeURIComponent('Halo admin, saya mau order IFFSOO Gold. Mohon info paket dan cara order tercepat.');
+    const URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
+    ['waTop','waBottom'].forEach(id=>{
+      const el=document.getElementById(id);el.href=URL;el.target='_blank';
+      el.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickWhatsApp',{label:id});}})
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cek Cepat: Kamu Sering Cepat Capek? | IFFSOO Gold</title>
+  <style>
+    body{margin:0;font-family:Arial,sans-serif;background:#101726;color:#fff}
+    .wrap{max-width:760px;margin:auto;padding:18px}
+    .panel{background:#162033;border:1px solid #25324b;border-radius:14px;padding:16px;margin-bottom:14px}
+    .q{padding:11px;border:1px solid #334360;border-radius:10px;margin:8px 0;cursor:pointer}
+    .q.active{border-color:#7ee081;background:#1f3a2e}
+    .btn{display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:12px 16px;border-radius:10px;font-weight:700}
+    img{width:100%;border-radius:12px}
+  </style>
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','948013317787488');fbq('track','PageView');fbq('track','ViewContent',{content_name:'LP Quiz Quick IFFSOO'});
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <h1>Coba Cek Bentar, Pak: Badannya Sering Gampang Pegal & Lemas?</h1>
+      <p>Kalau iya, Bapak cocok coba <b>IFFSOO Gold Herbal Original</b> di bawah ini.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Mana yang paling Bapak rasain sekarang?</h3>
+      <div class="q" onclick="pick(this)">Badan sering berasa lemas kalau lagi kerja</div>
+      <div class="q" onclick="pick(this)">Gampang ngos-ngosan pas lagi banyak urusan</div>
+      <div class="q" onclick="pick(this)">Butuh tambahan tenaga biar tetap segar tiap hari</div>
+    </div>
+
+    <div class="panel">
+      <img src="assets/id-11134207-81ztn-mdvosmyy0ow68d.png" alt="IFFSOO Gold"/>
+      <p><b>Kenapa beli di sini sekarang?</b><br>Jaminan barang asli 100% + harga paling murah karena langsung dari pusat.</p>
+      <a id="waCta" class="btn" href="#">Saya Mau Pesan Lewat WhatsApp</a>
+    </div>
+  </div>
+
+  <script>
+    function pick(el){
+      document.querySelectorAll('.q').forEach(x=>x.classList.remove('active'));
+      el.classList.add('active');
+      if(window.fbq){fbq('trackCustom','QuizOptionSelected',{option:el.textContent.trim()});}
+    }
+    const WA_NUMBER='6280000000000';
+    const WA_TEXT=encodeURIComponent('Halo admin, saya tertarik order IFFSOO Gold. Tolong bantu pilih paket yang cocok ya.');
+    const WA_URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
+    const btn=document.getElementById('waCta');
+    btn.href=WA_URL;btn.target='_blank';
+    btn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickWhatsApp',{label:'quiz-cta'});}});
+  </script>
+</body>
+</html>

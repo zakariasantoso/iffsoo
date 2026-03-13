@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IFFSOO Gold | Review Pelanggan & Harga Terbaik</title>
+  <style>
+    body{font-family:system-ui,Arial,sans-serif;margin:0;background:#f7f7f9;color:#111}
+    .wrap{max-width:980px;margin:auto;padding:16px}
+    .head{background:#fff;padding:18px;border-radius:14px;border:1px solid #ececec}
+    .btn{background:#25D366;color:#fff;text-decoration:none;padding:12px 16px;border-radius:10px;font-weight:700;display:inline-block}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:12px}
+    .card{background:#fff;border:1px solid #ececec;border-radius:12px;padding:10px}
+    img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+    .sticky{position:fixed;left:0;right:0;bottom:0;padding:10px;background:rgba(255,255,255,.94);border-top:1px solid #e4e4e4;text-align:center}
+    .space{height:70px}
+  </style>
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','948013317787488');fbq('track','PageView');fbq('track','ViewContent',{content_name:'LP Testimoni Grid IFFSOO'});
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <h1>IFFSOO Gold Herbal Original</h1>
+      <p>Buat Bapak yang sudah pernah coba, ini saat yang pas buat belanja lagi biar stok di rumah nggak habis.</p>
+      <p><b>Jaminan 100% Barang Asli</b> • Beli langsung di sini harganya lebih murah.</p>
+      <a id="waTop" class="btn" href="#">Pesan Lewat WhatsApp</a>
+    </div>
+
+    <div class="grid">
+      <div class="card"><img src="assets/487120268_17848265928439091_162934762815120517_n.webp" alt="Kata Pembeli 1"></div>
+      <div class="card"><img src="assets/487505309_17848999203439091_753614494266383513_n.webp" alt="Kata Pembeli 2"></div>
+      <div class="card"><img src="assets/491335553_17851691592439091_7326497496436954666_n.webp" alt="Kata Pembeli 3"></div>
+      <div class="card"><img src="assets/495227367_17852972964439091_4879537837142314239_n.webp" alt="Kata Pembeli 4"></div>
+      <div class="card"><img src="assets/WhatsApp Image 2025-04-28 at 19.55.47.jpeg" alt="Kata Pembeli 5"></div>
+      <div class="card"><img src="assets/WhatsApp Image 2026-02-08 at 11.44.42.jpeg" alt="Kata Pembeli 6"></div>
+    </div>
+
+    <div class="head" style="margin-top:14px">
+      <h2>Mau Pesan Sekarang, Pak?</h2>
+      <p>Klik tombol WhatsApp di bawah, nanti saya bantu pilih paket yang pas buat kebutuhan Bapak.</p>
+      <a id="waMid" class="btn" href="#">Tanya Saya Sekarang</a>
+    </div>
+
+    <div class="space"></div>
+  </div>
+
+  <div class="sticky"><a id="waSticky" class="btn" href="#">Pesan Sekarang</a></div>
+
+  <script>
+    const WA_NUMBER='6280000000000';
+    const WA_TEXT=encodeURIComponent('Halo, saya mau order IFFSOO Gold Herbal original. Minta rekomendasi paket terbaik ya.');
+    const WA_URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
+    ['waTop','waMid','waSticky'].forEach(id=>{const el=document.getElementById(id);el.href=WA_URL;el.target='_blank';el.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickWhatsApp',{placement:id});}})});
+  </script>
+</body>
+</html>
