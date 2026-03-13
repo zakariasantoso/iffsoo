@@ -16,6 +16,17 @@
     .old{opacity:.75;text-decoration:line-through;margin-right:8px}
     .new{font-weight:800;color:#ffd166;font-size:24px}
     @keyframes shine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px}
+    .modal.show{display:flex}
+    .modal-card{max-width:520px;width:100%;background:#132036;border:1px solid #2f476d;border-radius:14px;padding:16px;box-shadow:0 12px 40px rgba(0,0,0,.45);animation:popIn .25s ease}
+    .modal h3{margin:0 0 8px;font-size:22px}
+    .urgency{margin:10px 0;padding:10px;border:1px dashed #ffcf5a;background:rgba(255,207,90,.12);border-radius:10px;color:#ffe7a6}
+    .timer{font-weight:800;color:#ffd166}
+    .mini{font-size:13px;opacity:.9}
+    .action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn-outline{display:inline-block;border:1px solid #4f6488;color:#dce8ff;text-decoration:none;padding:12px 16px;border-radius:10px}
+    @keyframes popIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
   </style>
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -47,18 +58,80 @@
     </div>
   </div>
 
+  <div id="recommendModal" class="modal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle">Rekomendasi untuk Anda</h3>
+      <p id="modalCopy">Berdasarkan pilihan Anda, IFFSOO Gold Herbal Original cocok untuk menunjang stamina harian secara praktis.</p>
+      <div class="urgency">Penawaran harga khusus hari ini: <span class="old">Rp150.000</span><span class="new">Rp130.000</span><br><span class="mini">Sesi prioritas ini berakhir dalam <span id="countdown" class="timer">15:00</span></span></div>
+      <div class="action-row">
+        <a id="waModal" class="btn" href="#">Konsultasi & Pesan via WhatsApp</a>
+        <a id="closeModal" class="btn-outline" href="#">Lihat Dulu</a>
+      </div>
+    </div>
+  </div>
+
   <script>
+    const WA_NUMBER='6280000000000';
+    const WA_TEXT=encodeURIComponent('Halo admin, saya tertarik order IFFSOO Gold. Mohon konsultasi singkat dan rekomendasi paket terbaik.');
+    const WA_URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
+
+    const btn=document.getElementById('waCta');
+    const modal=document.getElementById('recommendModal');
+    const modalBtn=document.getElementById('waModal');
+    const closeModal=document.getElementById('closeModal');
+    const countdownEl=document.getElementById('countdown');
+    const modalCopy=document.getElementById('modalCopy');
+
+    [btn, modalBtn].forEach(el=>{el.href=WA_URL;el.target='_blank';});
+
+    btn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickWhatsApp',{label:'quiz-cta'});}});
+    modalBtn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickWhatsApp',{label:'quiz-modal'});}});
+
+    function startCountdown(seconds=900){
+      let s=seconds;
+      const tick=()=>{
+        const m=String(Math.floor(s/60)).padStart(2,'0');
+        const r=String(s%60).padStart(2,'0');
+        countdownEl.textContent=`${m}:${r}`;
+        if(s>0) s--;
+      };
+      tick();
+      clearInterval(window.__iffsooTimer);
+      window.__iffsooTimer=setInterval(tick,1000);
+    }
+
+    function showModal(){
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
+      startCountdown(900);
+      if(window.fbq){fbq('trackCustom','PopupShown',{popup:'quiz-recommendation'});}
+    }
+
+    function hideModal(e){
+      if(e) e.preventDefault();
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+    }
+
+    closeModal.addEventListener('click', hideModal);
+    modal.addEventListener('click',(e)=>{ if(e.target===modal) hideModal(); });
+
     function pick(el){
+      const selected = el.textContent.trim();
       document.querySelectorAll('.q').forEach(x=>x.classList.remove('active'));
       el.classList.add('active');
-      if(window.fbq){fbq('trackCustom','QuizOptionSelected',{option:el.textContent.trim()});}
+
+      if(selected.toLowerCase().includes('lemas')){
+        modalCopy.textContent='Pilihan Anda menunjukkan kebutuhan dukungan stamina harian yang konsisten. IFFSOO Gold dapat menjadi opsi pendamping aktivitas rutin.';
+      }else if(selected.toLowerCase().includes('ngos-ngosan')){
+        modalCopy.textContent='Pilihan Anda mengarah pada kebutuhan daya tahan saat aktivitas padat. IFFSOO Gold direkomendasikan untuk menjaga kebugaran harian.';
+      }else{
+        modalCopy.textContent='Pilihan Anda sangat sesuai dengan penggunaan IFFSOO Gold sebagai dukungan energi agar tetap prima sepanjang hari.';
+      }
+
+      if(window.fbq){fbq('trackCustom','QuizOptionSelected',{option:selected});}
+      showModal();
     }
-    const WA_NUMBER='6280000000000';
-    const WA_TEXT=encodeURIComponent('Halo admin, saya tertarik order IFFSOO Gold. Tolong bantu pilih paket yang cocok ya.');
-    const WA_URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
-    const btn=document.getElementById('waCta');
-    btn.href=WA_URL;btn.target='_blank';
-    btn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickWhatsApp',{label:'quiz-cta'});}});
   </script>
 </body>
 </html>
