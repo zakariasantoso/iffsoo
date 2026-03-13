@@ -62,7 +62,7 @@
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <h3 id="modalTitle">Rekomendasi untuk Anda</h3>
       <p id="modalCopy">Berdasarkan pilihan Anda, IFFSOO Gold Herbal Original cocok untuk menunjang stamina harian secara praktis.</p>
-      <div class="urgency">Penawaran harga khusus hari ini: <span class="old">Rp150.000</span><span class="new">Rp130.000</span><br><span class="mini">Sesi prioritas ini berakhir dalam <span id="countdown" class="timer">15:00</span></span></div>
+      <div class="urgency">Penawaran harga khusus hari ini: <span class="old">Rp150.000</span><span class="new">Rp130.000</span><br><span class="mini">Sesi prioritas ini berakhir dalam <span id="countdown" class="timer">--:--</span></span></div>
       <div class="action-row">
         <a id="waModal" class="btn" href="#">Konsultasi & Pesan via WhatsApp</a>
         <a id="closeModal" class="btn-outline" href="#">Lihat Dulu</a>
@@ -103,7 +103,8 @@
     function showModal(){
       modal.classList.add('show');
       modal.setAttribute('aria-hidden','false');
-      startCountdown(900);
+      const randomSeconds = (12 * 60) + Math.floor(Math.random() * ((15 * 60 + 59) - (12 * 60) + 1));
+      startCountdown(randomSeconds);
       if(window.fbq){fbq('trackCustom','PopupShown',{popup:'quiz-recommendation'});}
     }
 
