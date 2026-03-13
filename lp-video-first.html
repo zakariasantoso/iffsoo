@@ -17,6 +17,7 @@
     .new{font-size:30px;font-weight:800;color:#ffd166;letter-spacing:.3px}
     .pulse{display:inline-block;animation:pulseGold 2.6s ease-in-out infinite}
     @keyframes pulseGold{0%,100%{text-shadow:0 0 0 rgba(255,209,102,0)}50%{text-shadow:0 0 16px rgba(255,209,102,.45)}}
+    .ig-wrap{background:#0f0f0f;border-radius:10px;padding:6px}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     @media(max-width:700px){.row{grid-template-columns:1fr}}
   </style>
@@ -39,8 +40,8 @@
       <a id="waTop" class="btn" href="#">Tanya Saya & Pesan Sekarang</a>
     </div>
 
-    <div class="box">
-      <video controls playsinline preload="metadata" src="assets/Photos-3-001/1770908942245.mp4"></video>
+    <div class="box ig-wrap">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DVbZb69IH1o/" data-instgrm-version="14" style="margin:0 auto;max-width:540px;width:100%;"></blockquote>
     </div>
 
     <div class="row">
@@ -60,6 +61,7 @@
     </div>
   </div>
 
+  <script async src="https://www.instagram.com/embed.js"></script>
   <script>
     const WA_NUMBER='6280000000000';
     const WA_TEXT=encodeURIComponent('Halo admin, saya mau order IFFSOO Gold. Mohon info paket dan cara order tercepat.');
