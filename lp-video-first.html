@@ -65,12 +65,14 @@
   <script async src="https://www.instagram.com/embed.js"></script>
   <script>
     const WA_NUMBER='6285182096568';
-    const WA_TEXT=encodeURIComponent('Halo admin IFFSOO, saya mau klaim promo Rp130.000 + bonus kurma. Mohon info paket dan cara order tercepat.');
+    const PAGE_ID='lp-video-first';
+    const WA_TEXT=encodeURIComponent('Halo admin IFFSOO, saya mau klaim promo Rp130.000 + bonus kurma. Mohon info paket dan cara order tercepat. [SRC:'+PAGE_ID+']');
     const URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
     ['waTop','waBottom'].forEach(id=>{
       const el=document.getElementById(id);el.href=URL;el.target='_blank';
-      el.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickWhatsApp',{label:id});}})
+      el.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('track','Lead');fbq('trackCustom','ClickWhatsApp',{label:id});}})
     });
   </script>
 </body>
 </html>
+

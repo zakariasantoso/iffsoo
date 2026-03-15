@@ -71,10 +71,10 @@
     <section class="card">
       <h2>Kenapa banyak orang pilih beli di sini?</h2>
       <ul class="point">
-        <li>âœ… Jaminan 100% barang asli/original</li>
-        <li>âœ… Harganya Lebih Murah (Tanpa Potongan Toko Sebelah)</li>
-        <li>âœ… Cocok buat yang sering terasa lemas saat aktivitas padat</li>
-        <li>âœ… Praktis dikonsumsi untuk rutinitas harian</li>
+        <li>✅ Jaminan 100% barang asli/original</li>
+        <li>✅ Harganya Lebih Murah (Tanpa Potongan Toko Sebelah)</li>
+        <li>✅ Cocok buat yang sering terasa lemas saat aktivitas padat</li>
+        <li>✅ Praktis dikonsumsi untuk rutinitas harian</li>
       </ul>
     </section>
 
@@ -94,7 +94,8 @@
   <script async src="https://www.instagram.com/embed.js"></script>
   <script>
     const WA_NUMBER = '6285182096568'; // ganti ke nomor admin
-    const WA_TEXT = encodeURIComponent('Halo admin IFFSOO, saya mau klaim promo Rp130.000 + bonus kurma. Mohon bantu proses order sekarang.');
+    const PAGE_ID = 'lp-hard-sell-direct';
+    const WA_TEXT = encodeURIComponent('Halo admin IFFSOO, saya mau klaim promo Rp130.000 + bonus kurma. Mohon bantu proses order sekarang. [SRC:'+PAGE_ID+']');
     const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
 
     ['waCtaTop','waCtaMid','waCtaSticky'].forEach(id=>{
@@ -106,6 +107,7 @@
       el.addEventListener('click', ()=> {
         if(window.fbq){
           fbq('track','InitiateCheckout',{content_name:'IFFSOO Gold LP Direct'});
+          fbq('track','Lead');
           fbq('trackCustom','ClickWhatsApp',{label:id});
         }
       });
@@ -113,3 +115,4 @@
   </script>
 </body>
 </html>
+

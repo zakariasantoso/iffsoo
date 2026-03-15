@@ -72,7 +72,8 @@
 
   <script>
     const WA_NUMBER='6285182096568';
-    const WA_TEXT=encodeURIComponent('Halo admin IFFSOO, saya mau klaim promo Rp130.000 + bonus kurma. Mohon rekomendasi paket terbaik untuk saya.');
+    const PAGE_ID='lp-quiz-quick';
+    const WA_TEXT=encodeURIComponent('Halo admin IFFSOO, saya mau klaim promo Rp130.000 + bonus kurma. Mohon rekomendasi paket terbaik untuk saya. [SRC:'+PAGE_ID+']');
     const WA_URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
 
     const btn=document.getElementById('waCta');
@@ -84,8 +85,8 @@
 
     [btn, modalBtn].forEach(el=>{el.href=WA_URL;el.target='_blank';});
 
-    btn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickWhatsApp',{label:'quiz-cta'});}});
-    modalBtn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickWhatsApp',{label:'quiz-modal'});}});
+    btn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('track','Lead');fbq('trackCustom','ClickWhatsApp',{label:'quiz-cta'});}});
+    modalBtn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('track','Lead');fbq('trackCustom','ClickWhatsApp',{label:'quiz-modal'});}});
 
     function startCountdown(seconds=900){
       let s=seconds;
@@ -136,3 +137,4 @@
   </script>
 </body>
 </html>
+
