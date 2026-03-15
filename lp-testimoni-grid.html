@@ -58,11 +58,11 @@
 
   <script>
     const WA_NUMBER='6285182096568';
-    const PAGE_ID='lp-testimoni-grid';
-    const WA_TEXT=encodeURIComponent('Halo admin IFFSOO, saya mau order IFFSOO Gold dengan promo Rp130.000 + bonus kurma. Tolong dibantu pilih paketnya. [SRC:'+PAGE_ID+']');
+    const WA_TEXT=encodeURIComponent('Halo admin IFFSOO, saya mau order IFFSOO Gold dengan promo Rp130.000 + bonus kurma. Tolong dibantu pilih paketnya.');
     const WA_URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
     ['waTop','waMid','waSticky'].forEach(id=>{const el=document.getElementById(id);el.href=WA_URL;el.target='_blank';el.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('track','Lead');fbq('trackCustom','ClickWhatsApp',{placement:id});}})});
   </script>
 </body>
 </html>
+
 
