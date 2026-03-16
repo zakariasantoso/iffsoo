@@ -5,13 +5,24 @@ Landing page variations generated:
 3) lp-testimoni-grid.html
 4) lp-quiz-quick.html
 
-Already included:
-- Meta Pixel ID: 948013317787488
-- Events: PageView, ViewContent, InitiateCheckout, ClickWhatsApp (custom)
+Now aligned to hybrid CTA plan:
+- Primary CTA: Shopee (COD)
+- Secondary CTA: WhatsApp (consultation)
+
+Meta Pixel ID: 948013317787488
+Tracked events:
+- PageView
+- ViewContent
+- InitiateCheckout
+- Lead
+- ClickShopee (custom)
+- ClickWhatsApp (custom)
 
 IMPORTANT BEFORE RUN ADS:
-- Replace WA number in each file:
-  const WA_NUMBER='6280000000000';
-  -> change to your real WhatsApp admin number (without +)
+1) Replace WA number in each file:
+   const WA_NUMBER='6285182096568';
 
-If needed, you can also edit prefilled message by changing WA_TEXT in each file.
+2) Replace Shopee URL in each file:
+   const SHOPEE_URL='https://shopee.co.id/';
+
+3) Optional: adjust WA_TEXT per campaign angle.

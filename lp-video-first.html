@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -9,14 +9,12 @@
     .wrap{max-width:860px;margin:auto;padding:16px}
     .box{background:#171717;border:1px solid #2b2b2b;border-radius:14px;padding:14px;margin:12px 0}
     h1{font-size:28px;line-height:1.2;margin:8px 0}
-    .btn{display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:13px 18px;border-radius:10px;font-weight:700}
-    video,img{width:100%;border-radius:10px}
-    .price{font-size:22px;color:#ffd166;font-weight:700}
-    .price-line{margin:10px 0 14px}
+    .btn{display:inline-block;color:#fff;text-decoration:none;padding:13px 18px;border-radius:10px;font-weight:700}
+    .btn-sp{background:#ee4d2d}.btn-wa{background:#25D366}
+    .row-btn{display:flex;gap:10px;flex-wrap:wrap}
+    img{width:100%;border-radius:10px}
     .old{opacity:.72;text-decoration:line-through;margin-right:8px}
     .new{font-size:30px;font-weight:800;color:#ffd166;letter-spacing:.3px}
-    .pulse{display:inline-block;animation:pulseGold 2.6s ease-in-out infinite}
-    @keyframes pulseGold{0%,100%{text-shadow:0 0 0 rgba(255,209,102,0)}50%{text-shadow:0 0 16px rgba(255,209,102,.45)}}
     .ig-wrap{background:#0f0f0f;border-radius:10px;padding:6px}
     .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
     @media(max-width:700px){.row{grid-template-columns:1fr}}
@@ -35,9 +33,12 @@
 <body>
   <div class="wrap">
     <div class="box">
-      <h1>Stok Promo Masih Tersedia — Lanjutkan Order Sekarang Sebelum Kehabisan!</h1>
-      <p>Khusus yang sudah lihat iklan/IG IFFSOO: klaim harga hemat + bonus kurma hari ini.</p>
-      <a id="waTop" class="btn" href="#">Pesan Sekarang via WhatsApp</a>
+      <h1>Lanjut checkout sekarang via Shopee (COD tersedia)</h1>
+      <p>Kalau masih mau konsultasi dulu, tim admin siap bantu via WhatsApp.</p>
+      <div class="row-btn">
+        <a id="spTop" class="btn btn-sp" href="#">Beli via Shopee (COD)</a>
+        <a id="waTop" class="btn btn-wa" href="#">Konsultasi WA</a>
+      </div>
     </div>
 
     <div class="box ig-wrap">
@@ -50,31 +51,34 @@
     </div>
 
     <div class="box">
-      <p class="price">Jaminan 100% Asli • Harga Promo Warm Audience</p>
-      <p class="price-line"><span class="old">Rp150.000</span><span class="new pulse">Rp130.000</span></p>
-      <p style="margin-top:-8px;color:#ffe7a6;font-weight:700">+ Bonus Kurma (selama stok bonus tersedia)</p>
+      <p><span class="old">Rp150.000</span><span class="new">Rp130.000</span> + Bonus Kurma</p>
       <ul>
         <li>Barang dijamin asli/original</li>
-        <li>Harganya lebih hemat (nggak kena potongan harga toko sebelah)</li>
-        <li>Membantu menjaga performa aktivitas dari pagi sampai malam</li>
+        <li>Checkout paling praktis via Shopee + COD</li>
+        <li>Konsultasi tetap tersedia via WA</li>
       </ul>
-      <a id="waBottom" class="btn" href="#">Pesan Sekarang via WhatsApp</a>
+      <div class="row-btn">
+        <a id="spBottom" class="btn btn-sp" href="#">Checkout Shopee</a>
+        <a id="waBottom" class="btn btn-wa" href="#">Chat WhatsApp</a>
+      </div>
     </div>
   </div>
 
   <script async src="https://www.instagram.com/embed.js"></script>
   <script>
     const WA_NUMBER='6285182096568';
-    const WA_TEXT=encodeURIComponent('Halo admin IFFSOO, saya mau klaim promo Rp130.000 + bonus kurma. Mohon info paket dan cara order tercepat.');
-    const URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
+    const WA_TEXT=encodeURIComponent('Halo admin IFFSOO, saya mau tanya dulu sebelum checkout.');
+    const WA_URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
+    const SHOPEE_URL='https://shopee.co.id/';
+
     ['waTop','waBottom'].forEach(id=>{
-      const el=document.getElementById(id);el.href=URL;el.target='_blank';
-      el.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('track','Lead');fbq('trackCustom','ClickWhatsApp',{label:id});}})
+      const el=document.getElementById(id);el.href=WA_URL;el.target='_blank';
+      el.addEventListener('click',()=>{if(window.fbq){fbq('track','Lead');fbq('trackCustom','ClickWhatsApp',{label:id});}})
+    });
+    ['spTop','spBottom'].forEach(id=>{
+      const el=document.getElementById(id);el.href=SHOPEE_URL;el.target='_blank';
+      el.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('trackCustom','ClickShopee',{label:id});}})
     });
   </script>
 </body>
 </html>
-
-
-
-
