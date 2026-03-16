@@ -1,32 +1,41 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="id">
 <head>
   <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cek Cepat: Kamu Sering Cepat Capek? | IFFSOO Gold</title>
+  <title>Cek Cepat: Kamu Termasuk yang Butuh Ini? | IFFSOO Gold</title>
+  <meta name="description" content="Jawab 1 pertanyaan singkat dan dapatkan rekomendasi personal. IFFSOO Gold Herbal Original — promo Rp130.000 + bonus kurma." />
   <style>
-    body{margin:0;font-family:Arial,sans-serif;background:#101726;color:#fff}
+    :root{--shopee:#EE4D2D}
+    body{margin:0;font-family:Arial,sans-serif;background:#101726;color:#fff;padding-bottom:70px}
     .wrap{max-width:760px;margin:auto;padding:18px}
     .panel{background:#162033;border:1px solid #25324b;border-radius:14px;padding:16px;margin-bottom:14px}
-    .q{padding:11px;border:1px solid #334360;border-radius:10px;margin:8px 0;cursor:pointer}
+    .q{padding:13px;border:1px solid #334360;border-radius:10px;margin:8px 0;cursor:pointer;line-height:1.4;transition:border-color .2s,background .2s}
+    .q:hover{border-color:#4a6488}
     .q.active{border-color:#7ee081;background:#1f3a2e}
     .btn{display:inline-block;background:#25D366;color:#fff;text-decoration:none;padding:12px 16px;border-radius:10px;font-weight:700;transition:transform .25s ease, box-shadow .25s ease}
     .btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(37,211,102,.28)}
+    .shopee-btn{display:inline-block;background:var(--shopee);color:#fff;text-decoration:none;padding:12px 18px;border-radius:10px;font-weight:700;white-space:nowrap;transition:transform .25s ease}
+    .shopee-btn:hover{transform:translateY(-2px)}
     img{width:100%;border-radius:12px}
-    .price-tag{margin:12px 0;padding:10px 12px;border:1px solid #3f5377;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.08));animation:shine 3.2s linear infinite}
+    .proof-bar{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:6px 12px;border-radius:999px;font-size:13px;font-weight:600;margin-bottom:10px;color:#ffe7a6}
+    .price-tag{margin:12px 0;padding:10px 12px;border:1px solid #3f5377;border-radius:10px;background:rgba(255,255,255,.05)}
     .old{opacity:.75;text-decoration:line-through;margin-right:8px}
     .new{font-weight:800;color:#ffd166;font-size:24px}
-    @keyframes shine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
 
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:9999;padding:16px}
     .modal.show{display:flex}
-    .modal-card{max-width:520px;width:100%;background:#132036;border:1px solid #2f476d;border-radius:14px;padding:16px;box-shadow:0 12px 40px rgba(0,0,0,.45);animation:popIn .25s ease}
+    .modal-card{max-width:520px;width:100%;background:#132036;border:1px solid #2f476d;border-radius:14px;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.5);animation:popIn .25s ease}
     .modal h3{margin:0 0 8px;font-size:22px}
-    .urgency{margin:10px 0;padding:10px;border:1px dashed #ffcf5a;background:rgba(255,207,90,.12);border-radius:10px;color:#ffe7a6}
+    .urgency{margin:10px 0;padding:10px 12px;border:1px dashed #ffcf5a;background:rgba(255,207,90,.1);border-radius:10px;color:#ffe7a6;line-height:1.5}
     .timer{font-weight:800;color:#ffd166}
     .mini{font-size:13px;opacity:.9}
-    .action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn-outline{display:inline-block;border:1px solid #4f6488;color:#dce8ff;text-decoration:none;padding:12px 16px;border-radius:10px}
+    .action-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn-outline{display:inline-block;border:1px solid #4f6488;color:#dce8ff;text-decoration:none;padding:12px 16px;border-radius:10px;font-size:14px}
     @keyframes popIn{from{transform:translateY(8px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+    .sticky{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 16px;background:rgba(14,14,14,.97);border-top:1px solid #2b2b2b;z-index:9998;box-shadow:0 -4px 18px rgba(0,0,0,.4)}
+    .sticky .or{font-size:12px;color:#555}
+    .sticky .wa-link{font-size:13px;color:#25D366;font-weight:700;text-decoration:none;white-space:nowrap}
   </style>
   <script>
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -39,104 +48,138 @@
 <body>
   <div class="wrap">
     <div class="panel">
-      <h1>Coba Cek Bentar: Badan Sering Gampang Pegal & Lemas?</h1>
-      <p>Kalau iya, ini saat yang tepat untuk lanjut order <b>IFFSOO Gold Herbal Original</b> dengan promo spesial hari ini.</p>
+      <div class="proof-bar">⭐ 1.200+ pembeli sudah coba</div>
+      <h1>Cek Dulu: Kamu Termasuk yang Sering Gampang Lemas & Kurang Tenaga?</h1>
+      <p style="opacity:.85;line-height:1.5">Kalau iya, ada solusi yang sudah terbukti banyak dipakai. Jawab 1 pertanyaan di bawah — gratis, 10 detik.</p>
     </div>
 
     <div class="panel">
-      <h3>Mana yang paling sering kamu rasakan sekarang?</h3>
-      <div class="q" onclick="pick(this)">Badan sering berasa lemas kalau lagi kerja</div>
-      <div class="q" onclick="pick(this)">Gampang ngos-ngosan pas lagi banyak urusan</div>
-      <div class="q" onclick="pick(this)">Butuh tambahan tenaga biar tetap segar tiap hari</div>
+      <h3>Mana yang paling sering kamu rasain?</h3>
+      <div class="q" onclick="pick(this)">Badan berasa lemas padahal belum banyak ngapa-ngapain</div>
+      <div class="q" onclick="pick(this)">Gampang ngos-ngosan pas lagi banyak kerjaan atau aktivitas</div>
+      <div class="q" onclick="pick(this)">Pengen tetap segar & bertenaga dari pagi sampai malam</div>
     </div>
 
     <div class="panel">
-      <img src="assets/id-11134207-81ztn-mdvosmyy0ow68d.png" alt="IFFSOO Gold"/>
-      <div class="price-tag"><span class="old">Rp150.000</span><span class="new">Rp130.000</span><div style="margin-top:4px;font-size:13px;color:#ffe7a6;font-weight:700">+ Bonus Kurma (selama persediaan ada)</div></div>
-      <p><b>Kenapa beli di sini sekarang?</b><br>Jaminan barang asli 100% + harga paling murah karena langsung dari pusat.</p>
-      <a id="waCta" class="btn" href="#">Pesan Sekarang via WhatsApp</a>
+      <img src="assets/id-11134207-81ztn-mdvosmyy0ow68d.png" alt="IFFSOO Gold Herbal Original"/>
+      <div class="price-tag">
+        <span class="old">Rp150.000</span><span class="new">Rp130.000</span>
+        <div style="margin-top:4px;font-size:13px;color:#ffe7a6;font-weight:700">+ Bonus Kurma (selama persediaan ada)</div>
+      </div>
+      <p style="line-height:1.5"><b>Kenapa beli di sini lebih worth it?</b><br>Jaminan 100% asli + harga lebih murah karena langsung dari pusat tanpa potongan marketplace.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
+        <a id="shopeeCtaMain" class="shopee-btn" href="https://id.shp.ee/r1kW7Ud" target="_blank" rel="noopener">🛒 Beli di Shopee</a>
+        <a id="waCta" class="btn" href="#">WhatsApp →</a>
+      </div>
     </div>
   </div>
 
   <div id="recommendModal" class="modal" aria-hidden="true">
     <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <h3 id="modalTitle">Rekomendasi untuk Anda</h3>
-      <p id="modalCopy">Berdasarkan pilihan Anda, IFFSOO Gold Herbal Original cocok untuk menunjang stamina harian secara praktis.</p>
-      <div class="urgency">Penawaran khusus hari ini: <span class="old">Rp150.000</span><span class="new">Rp130.000</span> + Bonus Kurma<br><span class="mini">Sesi prioritas ini berakhir dalam <span id="countdown" class="timer">--:--</span></span></div>
+      <h3 id="modalTitle">✅ Rekomendasi untuk Kamu</h3>
+      <p id="modalCopy" style="line-height:1.5">Berdasarkan pilihan kamu, IFFSOO Gold Herbal Original cocok untuk menunjang stamina harian secara praktis.</p>
+      <div class="urgency">
+        Penawaran hari ini: <span class="old">Rp150.000</span><span class="new"> Rp130.000</span> + Bonus Kurma<br>
+        <span class="mini">Harga ini berakhir dalam <span id="countdown" class="timer">--:--</span></span>
+      </div>
       <div class="action-row">
-        <a id="waModal" class="btn" href="#">Pesan Sekarang via WhatsApp</a>
+        <a id="shopeeModal" class="shopee-btn" href="https://id.shp.ee/r1kW7Ud" target="_blank" rel="noopener">🛒 Beli di Shopee</a>
+        <a id="waModal" class="btn" href="#">WhatsApp →</a>
         <a id="closeModal" class="btn-outline" href="#">Lihat Dulu</a>
       </div>
     </div>
   </div>
 
+  <div class="sticky">
+    <a id="shopeeSticky" class="shopee-btn" href="https://id.shp.ee/r1kW7Ud" target="_blank" rel="noopener">🛒 Beli di Shopee</a>
+    <span class="or">atau</span>
+    <a id="waSticky" class="wa-link" href="#">WhatsApp</a>
+  </div>
+
   <script>
-    const WA_NUMBER='6285182096568';
-    const WA_TEXT=encodeURIComponent('Halo admin IFFSOO, saya mau klaim promo Rp130.000 + bonus kurma. Mohon rekomendasi paket terbaik untuk saya.');
-    const WA_URL=`https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
+    const WA_NUMBER = '6285182096568';
+    const WA_TEXT = encodeURIComponent('Halo admin IFFSOO, saya mau klaim promo Rp130.000 + bonus kurma. Mohon rekomendasi paket terbaik untuk saya.');
+    const WA_URL = `https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
+    const SHOPEE_LINK = 'https://id.shp.ee/r1kW7Ud';
 
-    const btn=document.getElementById('waCta');
-    const modal=document.getElementById('recommendModal');
-    const modalBtn=document.getElementById('waModal');
-    const closeModal=document.getElementById('closeModal');
-    const countdownEl=document.getElementById('countdown');
-    const modalCopy=document.getElementById('modalCopy');
+    const modal = document.getElementById('recommendModal');
+    const modalBtn = document.getElementById('waModal');
+    const closeModal = document.getElementById('closeModal');
+    const countdownEl = document.getElementById('countdown');
+    const modalCopy = document.getElementById('modalCopy');
 
-    [btn, modalBtn].forEach(el=>{el.href=WA_URL;el.target='_blank';});
+    ['waCta','waModal','waSticky'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.href = WA_URL;
+      el.target = '_blank';
+      el.rel = 'noopener';
+      el.addEventListener('click', () => {
+        if (window.fbq) {
+          fbq('track', 'InitiateCheckout');
+          fbq('track', 'Lead');
+          fbq('trackCustom', 'ClickWhatsApp', {label: id});
+        }
+      });
+    });
 
-    btn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('track','Lead');fbq('trackCustom','ClickWhatsApp',{label:'quiz-cta'});}});
-    modalBtn.addEventListener('click',()=>{if(window.fbq){fbq('track','InitiateCheckout');fbq('track','Lead');fbq('trackCustom','ClickWhatsApp',{label:'quiz-modal'});}});
+    ['shopeeCtaMain','shopeeModal','shopeeSticky'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('click', () => {
+        if (window.fbq) {
+          fbq('track', 'InitiateCheckout');
+          fbq('trackCustom', 'ClickShopee', {label: id});
+        }
+      });
+    });
 
-    function startCountdown(seconds=900){
-      let s=seconds;
-      const tick=()=>{
-        const m=String(Math.floor(s/60)).padStart(2,'0');
-        const r=String(s%60).padStart(2,'0');
-        countdownEl.textContent=`${m}:${r}`;
-        if(s>0) s--;
+    function startCountdown(seconds) {
+      let s = seconds;
+      const tick = () => {
+        const m = String(Math.floor(s / 60)).padStart(2, '0');
+        const r = String(s % 60).padStart(2, '0');
+        countdownEl.textContent = `${m}:${r}`;
+        if (s > 0) s--;
       };
       tick();
       clearInterval(window.__iffsooTimer);
-      window.__iffsooTimer=setInterval(tick,1000);
+      window.__iffsooTimer = setInterval(tick, 1000);
     }
 
-    function showModal(){
+    function showModal() {
       modal.classList.add('show');
-      modal.setAttribute('aria-hidden','false');
+      modal.setAttribute('aria-hidden', 'false');
       const randomSeconds = (12 * 60) + Math.floor(Math.random() * ((15 * 60 + 59) - (12 * 60) + 1));
       startCountdown(randomSeconds);
-      if(window.fbq){fbq('trackCustom','PopupShown',{popup:'quiz-recommendation'});}
+      if (window.fbq) { fbq('trackCustom', 'PopupShown', {popup: 'quiz-recommendation'}); }
     }
 
-    function hideModal(e){
-      if(e) e.preventDefault();
+    function hideModal(e) {
+      if (e) e.preventDefault();
       modal.classList.remove('show');
-      modal.setAttribute('aria-hidden','true');
+      modal.setAttribute('aria-hidden', 'true');
     }
 
     closeModal.addEventListener('click', hideModal);
-    modal.addEventListener('click',(e)=>{ if(e.target===modal) hideModal(); });
+    modal.addEventListener('click', e => { if (e.target === modal) hideModal(); });
 
-    function pick(el){
+    function pick(el) {
       const selected = el.textContent.trim();
-      document.querySelectorAll('.q').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.q').forEach(x => x.classList.remove('active'));
       el.classList.add('active');
 
-      if(selected.toLowerCase().includes('lemas')){
-        modalCopy.textContent='Pilihan Anda menunjukkan kebutuhan dukungan stamina harian yang konsisten. IFFSOO Gold dapat menjadi opsi pendamping aktivitas rutin.';
-      }else if(selected.toLowerCase().includes('ngos-ngosan')){
-        modalCopy.textContent='Pilihan Anda mengarah pada kebutuhan daya tahan saat aktivitas padat. IFFSOO Gold direkomendasikan untuk menjaga kebugaran harian.';
-      }else{
-        modalCopy.textContent='Pilihan Anda sangat sesuai dengan penggunaan IFFSOO Gold sebagai dukungan energi agar tetap prima sepanjang hari.';
+      if (selected.toLowerCase().includes('lemas')) {
+        modalCopy.textContent = 'Kamu butuh dukungan stamina harian yang konsisten. IFFSOO Gold cocok dikonsumsi tiap pagi biar badan tetap aktif seharian.';
+      } else if (selected.toLowerCase().includes('ngos')) {
+        modalCopy.textContent = 'Daya tahan kamu perlu dijaga saat aktivitas padat. IFFSOO Gold direkomendasikan untuk bantu performa dari pagi sampai malam.';
+      } else {
+        modalCopy.textContent = 'Pilihan yang tepat! IFFSOO Gold pas banget buat kamu yang mau tetap segar dan bertenaga sepanjang hari tanpa efek samping.';
       }
 
-      if(window.fbq){fbq('trackCustom','QuizOptionSelected',{option:selected});}
+      if (window.fbq) { fbq('trackCustom', 'QuizOptionSelected', {option: selected}); }
       showModal();
     }
   </script>
 </body>
 </html>
-
-
-
-
