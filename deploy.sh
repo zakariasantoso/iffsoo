@@ -8,10 +8,10 @@
 set -e
 
 # --- CONFIG ---
-SERVER_IP="157.173.195.82"
+SERVER_IP="103.166.157.203"
 SERVER_PORT="2220"
 SERVER_USER="root"
-SERVER_PASS="R8gJQ3RwIw55G"
+SERVER_PASS="MedanCity2022!!"
 DOMAIN="iffsoo.gold"
 WEB_ROOT="/var/www/iffsoo"
 
