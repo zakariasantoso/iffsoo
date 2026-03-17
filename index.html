@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hasil Iklan Sumatra – Laporan Triwulan 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #f4f6fb;
+    --card: #ffffff;
+    --card2: #eef1f8;
+    --biru: #2563eb;
+    --hijau: #16a34a;
+    --oranye: #ea580c;
+    --ungu: #7c3aed;
+    --merah: #dc2626;
+    --kuning: #d97706;
+    --teks: #1e293b;
+    --abu: #64748b;
+    --border: #e2e8f0;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--teks);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 16px;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    padding: 24px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .header h1 { font-size: 1.7rem; font-weight: 800; color: #fff; letter-spacing: -.3px; }
+  .header h1 span { color: #93c5fd; }
+  .header p { color: #bfdbfe; font-size: 1rem; margin-top: 4px; }
+  .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1.5px solid rgba(255,255,255,0.35);
+    border-radius: 24px;
+    padding: 8px 18px;
+    font-size: .95rem;
+    color: #fff;
+    font-weight: 600;
+  }
+
+  /* ── Layout ── */
+  .main { padding: 28px 36px; max-width: 1400px; margin: 0 auto; }
+
+  /* ── Penjelasan singkat ── */
+  .intro-box {
+    background: #eff6ff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: var(--radius);
+    padding: 16px 22px;
+    margin-bottom: 26px;
+    font-size: .95rem;
+    color: #1e40af;
+    line-height: 1.6;
+  }
+  .intro-box strong { color: #1e3a8a; }
+
+  /* ── KPI Cards ── */
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .kpi-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+  .kpi-card.c1::before { background: linear-gradient(90deg, #2563eb, #7c3aed); }
+  .kpi-card.c2::before { background: linear-gradient(90deg, #16a34a, #0891b2); }
+  .kpi-card.c3::before { background: linear-gradient(90deg, #ea580c, #dc2626); }
+  .kpi-card.c4::before { background: linear-gradient(90deg, #0891b2, #2563eb); }
+  .kpi-card.c5::before { background: linear-gradient(90deg, #7c3aed, #ea580c); }
+  .kpi-card.c6::before { background: linear-gradient(90deg, #d97706, #16a34a); }
+  .kpi-icon { font-size: 1.6rem; margin-bottom: 8px; }
+  .kpi-label { font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--abu); margin-bottom: 6px; }
+  .kpi-value { font-size: 2rem; font-weight: 800; line-height: 1; color: var(--teks); }
+  .kpi-sub { font-size: .88rem; color: var(--abu); margin-top: 6px; line-height: 1.4; }
+
+  /* ── Filter Bar ── */
+  .filter-section { margin-bottom: 24px; }
+  .filter-section > p { font-size: 1rem; font-weight: 700; color: var(--teks); margin-bottom: 10px; }
+  .filter-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .filter-btn {
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 24px;
+    padding: 8px 20px;
+    font-size: .95rem;
+    color: var(--teks);
+    cursor: pointer;
+    transition: all .18s;
+    font-weight: 500;
+  }
+  .filter-btn:hover { border-color: var(--biru); color: var(--biru); background: #eff6ff; }
+  .filter-btn.active { background: var(--biru); border-color: var(--biru); color: #fff; font-weight: 700; }
+
+  /* ── Charts Grid ── */
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+  .chart-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .chart-card.wide { grid-column: span 2; }
+  .chart-title { font-size: 1.05rem; font-weight: 700; color: var(--teks); margin-bottom: 4px; }
+  .chart-sub { font-size: .9rem; color: var(--abu); margin-bottom: 18px; line-height: 1.4; }
+  .chart-wrap { position: relative; height: 280px; }
+  .chart-header { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 0; }
+
+  /* ── Metric Selector ── */
+  .metric-select {
+    background: var(--card2);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    color: var(--teks);
+    font-size: .92rem;
+    padding: 7px 14px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .metric-select:focus { outline: none; border-color: var(--biru); }
+
+  /* ── Table ── */
+  .table-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .table-header { padding: 20px 24px 14px; }
+  .table-header .chart-title { margin-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  thead th {
+    background: var(--card2);
+    padding: 13px 16px;
+    text-align: left;
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--abu);
+    font-weight: 700;
+    border-bottom: 2px solid var(--border);
+  }
+  tbody td { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: .93rem; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #f8faff; }
+  .region-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .terbaik { color: var(--hijau); font-weight: 700; }
+  .foot td { background: #eff6ff; font-weight: 800; color: var(--teks); border-top: 2px solid #bfdbfe; font-size: .95rem; }
+
+  /* ── Catatan kaki ── */
+  .footer { text-align: center; padding: 20px; color: var(--abu); font-size: .88rem; border-top: 1.5px solid var(--border); }
+
+  @media (max-width: 700px) {
+    .charts-grid { grid-template-columns: 1fr; }
+    .chart-card.wide { grid-column: span 1; }
+    .main { padding: 16px; }
+    .header { padding: 18px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div>
+    <h1>📊 Hasil Iklan <span>Sumatra</span></h1>
+    <p>Laporan Triwulan · 5 Daerah · Januari – Maret 2026</p>
+  </div>
+  <div class="badge">📅 1 Jan 2026 – 16 Mar 2026</div>
+</div>
+
+<div class="main">
+
+  <!-- Penjelasan singkat -->
+  <div class="intro-box">
+    📌 <strong>Laporan ini menunjukkan seberapa baik iklan kita berjalan di 5 daerah Sumatra.</strong>
+    Gunakan tombol di bawah untuk melihat hasil per daerah, atau biarkan "Semua Daerah" untuk melihat gambaran keseluruhan.
+  </div>
+
+  <!-- Kartu Ringkasan Utama -->
+  <div class="kpi-row" id="kpiRow">
+    <div class="kpi-card c1">
+      <div class="kpi-icon">👥</div>
+      <div class="kpi-label">Orang yang Lihat Iklan</div>
+      <div class="kpi-value" id="kpi-reach">—</div>
+      <div class="kpi-sub">Total orang yang melihat iklan kita</div>
+    </div>
+    <div class="kpi-card c2">
+      <div class="kpi-icon">👆</div>
+      <div class="kpi-label">Yang Klik Iklan</div>
+      <div class="kpi-value" id="kpi-clicks">—</div>
+      <div class="kpi-sub">Orang yang menekan/mengklik iklan</div>
+    </div>
+    <div class="kpi-card c3">
+      <div class="kpi-icon">❤️</div>
+      <div class="kpi-label">Suka, Komentar & Share</div>
+      <div class="kpi-value" id="kpi-interactions">—</div>
+      <div class="kpi-sub">Total reaksi di halaman iklan</div>
+    </div>
+    <div class="kpi-card c4">
+      <div class="kpi-icon">🎯</div>
+      <div class="kpi-label">Persentase yang Klik</div>
+      <div class="kpi-value" id="kpi-ctr">—</div>
+      <div class="kpi-sub">Dari 100 orang yang lihat, berapa yang klik</div>
+    </div>
+    <div class="kpi-card c5">
+      <div class="kpi-icon">💰</div>
+      <div class="kpi-label">Biaya per 1.000 Orang Lihat</div>
+      <div class="kpi-value" id="kpi-cpm">—</div>
+      <div class="kpi-sub">Rupiah yang dikeluarkan per 1.000 tayangan</div>
+    </div>
+    <div class="kpi-card c6">
+      <div class="kpi-icon">🖱️</div>
+      <div class="kpi-label">Biaya per Satu Klik</div>
+      <div class="kpi-value" id="kpi-cpc">—</div>
+      <div class="kpi-sub">Rupiah yang dikeluarkan setiap ada yang klik</div>
+    </div>
+  </div>
+
+  <!-- Pilih Daerah -->
+  <div class="filter-section">
+    <p>👉 Pilih daerah yang ingin dilihat:</p>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="setFilter(this, 'All')">🗺️ Semua Daerah</button>
+      <button class="filter-btn" onclick="setFilter(this, 'South Sumatra')">Sumatra Selatan</button>
+      <button class="filter-btn" onclick="setFilter(this, 'Riau')">Riau</button>
+      <button class="filter-btn" onclick="setFilter(this, 'West Sumatra')">Sumatra Barat</button>
+      <button class="filter-btn" onclick="setFilter(this, 'Jambi')">Jambi</button>
+      <button class="filter-btn" onclick="setFilter(this, 'Bengkulu')">Bengkulu</button>
+    </div>
+  </div>
+
+  <!-- Grafik Baris 1 -->
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-title">👥 Berapa Orang yang Lihat Iklan?</div>
+      <div class="chart-sub">Jumlah total orang yang melihat iklan kita di masing-masing daerah</div>
+      <div class="chart-wrap"><canvas id="reachChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">👆 Yang Klik &amp; Yang Suka/Komentar</div>
+      <div class="chart-sub">Perbandingan jumlah klik dan jumlah reaksi (suka, komentar, share) per daerah</div>
+      <div class="chart-wrap"><canvas id="engagementChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Grafik Tren Harian -->
+  <div class="charts-grid">
+    <div class="chart-card wide">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">📈 Perkembangan Iklan Tiap Hari</div>
+          <div class="chart-sub">Lihat naik turunnya hasil iklan dari hari ke hari. Pilih angka yang ingin dilihat di sebelah kanan ➡️</div>
+        </div>
+        <select class="metric-select" id="metricSelect" onchange="updateTrendChart()">
+          <option value="reach">Orang yang Lihat</option>
+          <option value="clicks">Yang Klik</option>
+          <option value="interactions">Suka / Komentar</option>
+          <option value="ctr">Persentase yang Klik (%)</option>
+          <option value="cpm">Biaya per 1.000 Orang (Rp)</option>
+          <option value="cpc">Biaya per Klik (Rp)</option>
+        </select>
+      </div>
+      <div class="chart-wrap" style="height:300px; margin-top:16px"><canvas id="trendChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Grafik Baris 3 -->
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-title">🎯 Daerah Mana yang Paling Banyak Klik?</div>
+      <div class="chart-sub">Semakin tinggi angkanya, semakin banyak orang yang tertarik klik iklan kita (dalam persen)</div>
+      <div class="chart-wrap"><canvas id="ctrChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">💰 Berapa Biaya Iklan per Daerah?</div>
+      <div class="chart-sub">Biaya per 1.000 orang yang lihat vs biaya per satu orang yang klik (dalam Rupiah)</div>
+      <div class="chart-wrap"><canvas id="costChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Tabel Ringkasan -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="chart-title">📋 Tabel Lengkap Hasil Iklan per Daerah</div>
+      <div class="chart-sub" style="margin-bottom:0">Angka keseluruhan selama periode Januari – Maret 2026. <span style="color:#16a34a; font-weight:700">Hijau</span> = hasil terbaik.</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Daerah</th>
+          <th class="num">Yang Lihat Iklan</th>
+          <th class="num">Yang Klik</th>
+          <th class="num">Suka/Komentar</th>
+          <th class="num">% yang Klik</th>
+          <th class="num">Biaya/1.000 Orang (Rp)</th>
+          <th class="num">Biaya/Klik (Rp)</th>
+          <th class="num">Rata-rata Dilihat</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+      <tfoot id="tableFoot"></tfoot>
+    </table>
+  </div>
+
+</div>
+
+<div class="footer">
+  Sumber data: Laporan Iklan Facebook/Meta · Periode 1 Januari – 16 Maret 2026 · 5 Daerah Sumatra
+</div>
+
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+const WARNA = {
+  'South Sumatra': '#2563eb',
+  'Riau':          '#7c3aed',
+  'West Sumatra':  '#ea580c',
+  'Jambi':         '#16a34a',
+  'Bengkulu':      '#dc2626',
+};
+
+const NAMAINDO = {
+  'South Sumatra': 'Sumatra Selatan',
+  'Riau':          'Riau',
+  'West Sumatra':  'Sumatra Barat',
+  'Jambi':         'Jambi',
+  'Bengkulu':      'Bengkulu',
+};
+
+const regionTotals = [
+  { region: 'South Sumatra', reach: 21200, clicks: 813,  interactions: 7298, ctr: 2.733232, cpm: 4517.498739, cpc: 165.280443, freq: 1.403066 },
+  { region: 'Riau',          reach: 17988, clicks: 654,  interactions: 6624, ctr: 2.540200, cpm: 4459.294648, cpc: 175.548930, freq: 1.431288 },
+  { region: 'West Sumatra',  reach: 10259, clicks: 420,  interactions: 4151, ctr: 2.744022, cpm: 4935.776820, cpc: 179.873810, freq: 1.491958 },
+  { region: 'Jambi',         reach:  6560, clicks: 255,  interactions: 2373, ctr: 2.701557, cpm: 4764.275877, cpc: 176.352941, freq: 1.438872 },
+  { region: 'Bengkulu',      reach:  4296, clicks: 211,  interactions: 1513, ctr: 3.464696, cpm: 4679.967159, cpc: 135.075829, freq: 1.417598 },
+];
+
+const grandTotal = {
+  reach: 58842, clicks: 2353, interactions: 21959,
+  ctr: 2.725714, cpm: 4612.747029, cpc: 169.230769, freq: 1.467081
+};
+
+const tanggalList = ['2026-01-13','2026-01-14','2026-01-24','2026-01-25','2026-01-26','2026-01-27','2026-01-28','2026-01-29'];
+const labelTanggal = tanggalList.map(d => d.slice(5).replace('-', '/'));
+
+const dataHarian = {
+  'South Sumatra': {
+    reach:        [603,3569,4153,4344,3352,3843,3608,2992],
+    clicks:       [17,131,117,138,105,108,106,91],
+    interactions: [168,1252,1182,1098,959,998,891,750],
+    ctr:          [2.73,3.02,2.65,2.78,2.73,2.51,2.67,2.77],
+    cpm:          [4500,3956,6733,4319,4353,4066,3968,4035],
+    cpc:          [165,131,254,155,160,162,148,146],
+  },
+  'Riau': {
+    reach:        [555,2939,3619,4249,2905,3087,2951,2471],
+    clicks:       [16,98,88,110,93,88,77,84],
+    interactions: [167,1107,1008,1149,902,844,780,667],
+    ctr:          [2.81,2.70,2.32,2.30,2.79,2.45,2.37,3.01],
+    cpm:          [4903,3981,6443,4380,4381,3805,3843,4075],
+    cpc:          [174,147,278,191,157,155,162,135],
+  },
+  'West Sumatra': {
+    reach:        [338,1628,2074,2205,1716,1997,1775,1612],
+    clicks:       [7,65,64,53,61,57,59,54],
+    interactions: [103,655,645,579,568,594,531,476],
+    ctr:          [2.05,3.13,2.84,2.15,3.09,2.45,2.83,3.02],
+    cpm:          [4807,4431,7055,4930,4788,4624,4268,4235],
+    cpc:          [235,142,248,229,155,189,151,140],
+  },
+  'Jambi': {
+    reach:        [198,1054,1347,1428,1095,1212,1078,971],
+    clicks:       [5,37,39,42,33,25,34,40],
+    interactions: [53,374,369,405,330,307,269,266],
+    ctr:          [2.46,2.87,2.73,2.60,2.63,1.82,2.82,3.75],
+    cpm:          [4335,4317,7050,4750,4351,4241,4155,4199],
+    cpc:          [176,150,258,183,166,233,147,112],
+  },
+  'Bengkulu': {
+    reach:        [167,733,928,912,599,791,741,588],
+    clicks:       [6,35,31,37,21,33,25,23],
+    interactions: [46,244,278,226,158,202,193,166],
+    ctr:          [3.53,4.09,3.10,3.74,3.15,3.68,2.91,3.52],
+    cpm:          [4200,4187,6776,4651,4691,4102,4027,3923],
+    cpc:          [119,102,219,124,149,111,138,111],
+  },
+};
+
+// ─── STATE ───────────────────────────────────────────────────────────────────
+let filterAktif = 'All';
+let grafik = {};
+
+// ─── FUNGSI BANTU ────────────────────────────────────────────────────────────
+function getDaerahTerfilter() {
+  return filterAktif === 'All' ? regionTotals : regionTotals.filter(r => r.region === filterAktif);
+}
+function getTotalTerfilter() {
+  if (filterAktif === 'All') return grandTotal;
+  return getDaerahTerfilter()[0];
+}
+
+// ─── KARTU RINGKASAN ─────────────────────────────────────────────────────────
+function updateKartu() {
+  const t = getTotalTerfilter();
+  document.getElementById('kpi-reach').textContent        = t.reach.toLocaleString('id-ID');
+  document.getElementById('kpi-clicks').textContent       = t.clicks.toLocaleString('id-ID');
+  document.getElementById('kpi-interactions').textContent = t.interactions.toLocaleString('id-ID');
+  document.getElementById('kpi-ctr').textContent          = t.ctr.toFixed(2) + '%';
+  document.getElementById('kpi-cpm').textContent          = 'Rp ' + Math.round(t.cpm).toLocaleString('id-ID');
+  document.getElementById('kpi-cpc').textContent          = 'Rp ' + Math.round(t.cpc).toLocaleString('id-ID');
+}
+
+// ─── TABEL ────────────────────────────────────────────────────────────────────
+function updateTabel() {
+  const daerah = getDaerahTerfilter();
+  const body = document.getElementById('tableBody');
+  const foot = document.getElementById('tableFoot');
+  const minCPM = Math.min(...daerah.map(r => r.cpm));
+  const maxCTR = Math.max(...daerah.map(r => r.ctr));
+  const minCPC = Math.min(...daerah.map(r => r.cpc));
+
+  body.innerHTML = daerah.map(r => `
+    <tr>
+      <td><span class="region-dot" style="background:${WARNA[r.region]}"></span><strong>${NAMAINDO[r.region]}</strong></td>
+      <td class="num">${r.reach.toLocaleString('id-ID')}</td>
+      <td class="num">${r.clicks.toLocaleString('id-ID')}</td>
+      <td class="num">${r.interactions.toLocaleString('id-ID')}</td>
+      <td class="num ${r.ctr === maxCTR ? 'terbaik' : ''}">${r.ctr.toFixed(2)}% ${r.ctr === maxCTR ? '✅' : ''}</td>
+      <td class="num ${r.cpm === minCPM ? 'terbaik' : ''}">Rp ${Math.round(r.cpm).toLocaleString('id-ID')} ${r.cpm === minCPM ? '✅' : ''}</td>
+      <td class="num ${r.cpc === minCPC ? 'terbaik' : ''}">Rp ${Math.round(r.cpc).toLocaleString('id-ID')} ${r.cpc === minCPC ? '✅' : ''}</td>
+      <td class="num">${r.freq.toFixed(2)}x</td>
+    </tr>
+  `).join('');
+
+  if (filterAktif === 'All') {
+    const tot = grandTotal;
+    foot.innerHTML = `<tr class="foot">
+      <td>🔢 <strong>TOTAL / RATA-RATA</strong></td>
+      <td class="num">${tot.reach.toLocaleString('id-ID')}</td>
+      <td class="num">${tot.clicks.toLocaleString('id-ID')}</td>
+      <td class="num">${tot.interactions.toLocaleString('id-ID')}</td>
+      <td class="num">${tot.ctr.toFixed(2)}%</td>
+      <td class="num">Rp ${Math.round(tot.cpm).toLocaleString('id-ID')}</td>
+      <td class="num">Rp ${Math.round(tot.cpc).toLocaleString('id-ID')}</td>
+      <td class="num">${tot.freq.toFixed(2)}x</td>
+    </tr>`;
+  } else {
+    foot.innerHTML = '';
+  }
+}
+
+// ─── PENGATURAN GRAFIK ────────────────────────────────────────────────────────
+Chart.defaults.color = '#64748b';
+Chart.defaults.borderColor = '#e2e8f0';
+Chart.defaults.font.family = "'Segoe UI', Arial, sans-serif";
+Chart.defaults.font.size = 13;
+
+const baseOpts = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      backgroundColor: '#1e293b', borderColor: '#334155', borderWidth: 1,
+      titleColor: '#f1f5f9', bodyColor: '#cbd5e1', padding: 12, cornerRadius: 8,
+      titleFont: { size: 13, weight: 'bold' }, bodyFont: { size: 13 }
+    }
+  },
+  scales: {
+    x: { grid: { color: '#f1f5f9' }, ticks: { color: '#475569', font: { size: 12 } } },
+    y: { grid: { color: '#f1f5f9' }, ticks: { color: '#475569', font: { size: 12 } } }
+  }
+};
+
+// ─── GRAFIK: ORANG YANG LIHAT ─────────────────────────────────────────────────
+function buatGrafikLihat() {
+  const daerah = getDaerahTerfilter();
+  const ctx = document.getElementById('reachChart').getContext('2d');
+  if (grafik.reach) grafik.reach.destroy();
+  grafik.reach = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: daerah.map(r => NAMAINDO[r.region]),
+      datasets: [{ data: daerah.map(r => r.reach), backgroundColor: daerah.map(r => WARNA[r.region] + 'cc'), borderColor: daerah.map(r => WARNA[r.region]), borderWidth: 2, borderRadius: 7 }]
+    },
+    options: { ...baseOpts, plugins: { ...baseOpts.plugins, tooltip: { ...baseOpts.plugins.tooltip, callbacks: { label: c => ' ' + c.raw.toLocaleString('id-ID') + ' orang' } } } }
+  });
+}
+
+// ─── GRAFIK: KLIK & REAKSI ────────────────────────────────────────────────────
+function buatGrafikKlik() {
+  const daerah = getDaerahTerfilter();
+  const ctx = document.getElementById('engagementChart').getContext('2d');
+  if (grafik.engagement) grafik.engagement.destroy();
+  grafik.engagement = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: daerah.map(r => NAMAINDO[r.region]),
+      datasets: [
+        { label: '👆 Yang Klik', data: daerah.map(r => r.clicks), backgroundColor: '#2563ebcc', borderColor: '#2563eb', borderWidth: 2, borderRadius: 5 },
+        { label: '❤️ Suka/Komentar', data: daerah.map(r => r.interactions), backgroundColor: '#16a34acc', borderColor: '#16a34a', borderWidth: 2, borderRadius: 5 },
+      ]
+    },
+    options: { ...baseOpts, plugins: { ...baseOpts.plugins, legend: { display: true, labels: { color: '#475569', boxWidth: 14, padding: 18, font: { size: 13 } } } } }
+  });
+}
+
+// ─── GRAFIK: TREN HARIAN ──────────────────────────────────────────────────────
+function buatGrafikTren() {
+  const ctx = document.getElementById('trendChart').getContext('2d');
+  if (grafik.trend) grafik.trend.destroy();
+  updateTrendChart(true, ctx);
+}
+
+function updateTrendChart(pertama = false, ctx = null) {
+  const metrik = document.getElementById('metricSelect').value;
+  const daerahList = filterAktif === 'All' ? Object.keys(dataHarian) : [filterAktif];
+  const datasets = daerahList.map(d => ({
+    label: NAMAINDO[d],
+    data: dataHarian[d][metrik],
+    borderColor: WARNA[d],
+    backgroundColor: WARNA[d] + '18',
+    fill: true, tension: 0.38, pointRadius: 5, pointHoverRadius: 7, borderWidth: 2.5
+  }));
+  if (!pertama && grafik.trend) { grafik.trend.data.datasets = datasets; grafik.trend.update(); return; }
+  if (!ctx) ctx = document.getElementById('trendChart').getContext('2d');
+  grafik.trend = new Chart(ctx, {
+    type: 'line',
+    data: { labels: labelTanggal, datasets },
+    options: { ...baseOpts, plugins: { ...baseOpts.plugins, legend: { display: true, labels: { color: '#475569', boxWidth: 14, padding: 18, font: { size: 13 } } } } }
+  });
+}
+
+// ─── GRAFIK: % KLIK ───────────────────────────────────────────────────────────
+function buatGrafikPersen() {
+  const daerah = getDaerahTerfilter();
+  const ctx = document.getElementById('ctrChart').getContext('2d');
+  if (grafik.ctr) grafik.ctr.destroy();
+  grafik.ctr = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: daerah.map(r => NAMAINDO[r.region]),
+      datasets: [{ data: daerah.map(r => parseFloat(r.ctr.toFixed(2))), backgroundColor: daerah.map(r => WARNA[r.region] + 'cc'), borderColor: daerah.map(r => WARNA[r.region]), borderWidth: 2, borderRadius: 7 }]
+    },
+    options: { ...baseOpts,
+      plugins: { ...baseOpts.plugins, tooltip: { ...baseOpts.plugins.tooltip, callbacks: { label: c => ' ' + c.raw.toFixed(2) + '% yang klik' } } },
+      scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, ticks: { callback: v => v + '%' } } }
+    }
+  });
+}
+
+// ─── GRAFIK: BIAYA ───────────────────────────────────────────────────────────
+function buatGrafikBiaya() {
+  const daerah = getDaerahTerfilter();
+  const ctx = document.getElementById('costChart').getContext('2d');
+  if (grafik.cost) grafik.cost.destroy();
+  grafik.cost = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: daerah.map(r => NAMAINDO[r.region]),
+      datasets: [
+        { label: '💰 Per 1.000 Orang (Rp)', data: daerah.map(r => Math.round(r.cpm)), backgroundColor: '#ea580ccc', borderColor: '#ea580c', borderWidth: 2, borderRadius: 5 },
+        { label: '🖱️ Per Klik (Rp)', data: daerah.map(r => Math.round(r.cpc)), backgroundColor: '#7c3aedcc', borderColor: '#7c3aed', borderWidth: 2, borderRadius: 5 },
+      ]
+    },
+    options: { ...baseOpts,
+      plugins: { ...baseOpts.plugins, legend: { display: true, labels: { color: '#475569', boxWidth: 14, padding: 18, font: { size: 13 } } } },
+      scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, ticks: { callback: v => 'Rp ' + v.toLocaleString('id-ID') } } }
+    }
+  });
+}
+
+// ─── FILTER ───────────────────────────────────────────────────────────────────
+function setFilter(btn, region) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filterAktif = region;
+  updateSemua();
+}
+
+function updateSemua() {
+  updateKartu();
+  buatGrafikLihat();
+  buatGrafikKlik();
+  updateTrendChart();
+  buatGrafikPersen();
+  buatGrafikBiaya();
+  updateTabel();
+}
+
+// ─── INISIALISASI ─────────────────────────────────────────────────────────────
+updateKartu();
+buatGrafikLihat();
+buatGrafikKlik();
+buatGrafikTren();
+buatGrafikPersen();
+buatGrafikBiaya();
+updateTabel();
+</script>
+</body>
+</html>
